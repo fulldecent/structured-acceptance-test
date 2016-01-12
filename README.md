@@ -4,7 +4,7 @@ SASR is an open data format for static analysis tools.
 
 This document is version 0.0.1a. This project will follow [Semantic Versioning](http://semver.org/). Also, this recommendation follows the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml)
 
-Tools which support SASR will directly output a SASR-formatted report or include an option which allows it to directly output this report.
+Tools which produce SASR will directly output a SASR-formatted report or include an option which allows it to directly output this report. Services which consume SASR will accept any valid output from these tools and make great use of it.
 
 # What is Static Analysis?
 
