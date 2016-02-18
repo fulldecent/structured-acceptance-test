@@ -2,13 +2,21 @@
 
 SASR is an open data format for static analysis tools.
 
-This document is version 0.0.1a. This project will follow [Semantic Versioning](http://semver.org/). Also, this recommendation follows the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml)
+ - [x] Gives static analyzers an interoperable, standardized format to produce
+ - [x] Standardizes format for consumers: continous integration, command-line testing, IDEs
+ - [x] Supports static code analyzers as well as other non-code analyzers
+ - [x] Follows [Semantic Versioning](http://semver.org/)
+ - [x] Follows the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml)
+ - [ ] Supports real-time, incremental reporting
+ - [ ] Works with Code [Climate Engine specification](https://github.com/codeclimate/spec)
+
+This document is currently version 0.0.2. This will be a candidate for release when all above items are checked.
 
 Tools which produce SASR will directly output a SASR-formatted report or include an option which allows it to directly output this report. Services which consume SASR will accept any valid output from these tools and make great use of it.
 
 # What is Static Analysis?
 
-Static analysis is the review of a document that is performed without implementing that document's content. For example, to analyze United States constitution, the following analysis would be in scope:
+Static analysis is the review of a document that is performed without implementing that document's content. For example, to analyze the United States constitution, the following analysis would be in scope:
 
  * Check spelling
  * Check grammar
