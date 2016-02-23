@@ -63,8 +63,6 @@ This example shows the partial output of a process that disallows vowels being a
 
 ## Full specification
 
-FIXME: HOW TO KNOW WHICH FILES WERE CONSIDERED?
-
 The output is a collection of one **Identification** object and zero or more **Finding** objects which are formatted in [JSON](http://www.json.org/). Each object is [delimited by a new line](https://en.wikipedia.org/wiki/JSON_Streaming).
 
 A process MUST either produce output on STDOUT or save to a file. No output other than what is described in this specification is allowed. Note: a program MAY print additional information to STDERR; however, this specification provides no semantics for that additional information.
@@ -146,6 +144,8 @@ Note: `Associative` is the strongest and most useful guarantee.
 * `fixes` &mdash; **Optional** &mdash; See *Fix* below
 
 **CODE CLIMATE NOTE: categories and location are required**
+
+*File progress* MAY be reported by setting `rule` to "`Progress`" and setting `description` to `done`. This allows the *process* to communicate each file that was considered and the overall status.
 
 #### Detail
 
