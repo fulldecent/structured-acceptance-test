@@ -75,6 +75,10 @@ A *consumer* SHOULD consider the output incomplete if the *process* returned wit
 
 A *consumer* MUST consider an acceptance test *outcome* as `fail` if any finding is presented which represents a failure; otherwise it MUST be `pass`.
 
+Note: below is a very simple shell script that processes STAT Output and returns a non-zero status if the `outcome` is fail. It allows you to easily integrate with certain unit test and continuous integration environments.
+
+    ! pcregrep -qM '"failure"\s*:\s*true'
+
 ### Identification
 
 ```json
@@ -234,4 +238,4 @@ A *fix* is a proposed way to implement a *recommendation*. If a fix is provided,
 
 ### Extensibility
 
-Each object in this specification may have extra keys introduced by the *process* with proprietary information. The report *consumer* MUST ignore such additional information it does not understand.
+Each object in this specification may have extra keys introduced by the *process* with proprietary information. The report *consumer* MUST ignore such additional information it does not understand. The `failure` key is reserved and may not be used in extensions.
