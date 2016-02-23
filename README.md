@@ -1,19 +1,17 @@
-[TODO] Made by Will with inspiration from CC
-
 # Structured Acceptance Test
 
-**Note: This specification is a living, versioned document. We welcome your participation and appreciate your patience as we finalize the platform.**
+**Structured Acceptance Test ("STAT") is a simple and extensible standard for *acceptance testing processes*.** The *target* of the test can be any set of computer files, for example source code, images, audio files and documents. The *process* can be an automated computer program, manual execution of a test plan or even the vote of a committee of approvers. The *outcome* of the process is `pass` or `fail` and may also include helpful *findings* or *recommendations* which can be used to improve the target.
 
-Structured Acceptance Test ("STAT") is a standardized file format for acceptance testing processes. There are two parts:
+There are two parts to this specification:
 
- * [STAT Input Format](Stat-Input.md) -- describes what the process should test
- * [STAT Output Format](Stat-Output.md) -- describes any opinions rendered by the process
+ * [STAT Input](Stat-Input.md) -- defines what targets the process should test
+ * [STAT Output](Stat-Output.md) -- identifies the test process and expresses the outcome, findings and recommendations
 
-A program that supports Structured Acceptance Test format MUST accept any compliant STAT Input Format and produce compliant STAT Output Format. A compliant command-line program MUST accept any compliant STAT Input Format and produce compliant STAT Output Format on standard output. The compliant command-line program MAY specify that a command line-option be used to enable compliance; in such case, the preferred name `--stat-file=<INPUT>` SHOULD be used.
+A computer program is said to *support* the Structured Acceptance Test standard if it accepts any valid STAT Input and it produces a valid STAT Output. It is recommended that command-line computer programs use the `--stat-file=<INPUT>` switch to support the STAT standard.
 
 # Who can use it?
 
-This format is applicable for any process (automated tool or manual) which accepts computer files as input and validates them in some way. Examples of such processes include:
+This standard is applicable for any automated or manual process that accepts computer files as input and can make a `pass` or `fail` decision. Examples of such processes include:
 
  * Static code analyzers
   * Code linters
@@ -36,9 +34,10 @@ This format is applicable for any process (automated tool or manual) which accep
  * Manual testing
   * Manual inspection
   * Manual walkthroughs
-  * Customer feedback
+  * Unstructured customer feedback
+  * Committee vote
 
-The acceptance testing opinion rendered by the processes above can be used ("consumed") in:
+The acceptance testing *outcome*, *findings* and *recommendations* can be used (*consumed*) by:
 
  * Interactive file editors (IDEs, text editors, word processors, image editors)
  * Command-line reporting tools (unit test reports)
@@ -46,42 +45,59 @@ The acceptance testing opinion rendered by the processes above can be used ("con
 
 # Why should I use it? XKCD 927?
 
-**If your acceptance testing process uses a standardized output format then reporting tools can make better use of it.**
+**If your acceptance testing process uses a standardized output format then consumers can make better use of it.**
 
 Integrations are amazing. They allow `clang` compilers to show compile errors in your integrated development environment, they allow spelling errors to be underlined in your word processor and they show up as red flags when you review a pull request. But what if *all* of these validations can be shown *everywhere* they are relevant? Standardization supports this.
 
 This is the first widely-applicable standardization of its type so [XKCD 927](https://xkcd.com/927/) does not apply.
 
-Specific benefits include:
+Specific features of this specification include:
 
- * Validation results are streamable and available to the reporting tool incrementally
- * A simple reporting format applies to source code and non-code validation tasks
- * The formats are extensible for proprietary additions
- * Repeatability is specified
+ * **It is simple**, a few lines of Ruby can translate `gcc`, `clang` or `aspell` output into the required format
+ * **The format is extensible**, any acceptance testing process can use this format
+ * **Validation output is streamable** and available to the reporting tool incrementally
+ * **Repeatability** is specified
 
 # Project Status
 
-This document is currently version 0.1.0. We follow [Semantic Versioning](http://semver.org/). This will be a candidate for 1.0.0 release when all below items are checked.
+This standard is currently version 0.2.0. We follow [Semantic Versioning](http://semver.org/).
 
- - [x] Gives static analyzers an interoperable, standardized format to produce
- - [x] Standardizes format for consumers: continuous integration, command-line testing, IDEs
- - [x] Supports static code analyzers as well as other non-code analyzers
+**You can start using this standard today.** A few backwards-incompatible changes may be introduced before the 1.0.0. This will be a candidate for 1.0.0 release when all below items are completed.
+
+ - [x] Defines the input format to select computer files
+ - [x] Defines the output format for the outcome, findings and recommendations
  - [x] Follows the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml)
- - [ ] Supports real-time, incremental reporting
- - [ ] Works with Code [Climate Engine specification](https://github.com/codeclimate/spec)
- - [ ] "Hello world" alpha producer is created
- - [ ] "Hello world" alpha consumer is created
- - [ ] "Hello world" fully-compliant producer is created
- - [ ] "Hello world" fully-compliant consumer is created
- - [ ] "Hello world" fully-featured producer is created
- - [ ] "Hello world" fully-featured consumer is created
- - [ ] Third-part validation of this specification
- - [ ] One major validation tool or report consumer supports this format
+ - [x] Supports real-time, incremental reporting
+ - [ ] An example computer program is produced that supports STAT
+ - [ ] An example computer program is produced that reads and reports the above output
+ - [ ] Useful computer program is produced (or transformed) to support STAT
+ - [x] Compatibility is established with [Code Climate Engine specification](https://github.com/codeclimate/spec)
+
+# Copyright
+
+This specification is copyright 2016 William Entriken and is released under the MIT license.
 
 # Contributing
 
-Please help to review and improve this specification. Pull requests, issues and discussion are welcome!
+Development of this specification happens on GitHub. Please use [issues](https://github.com/fulldecent/structured-acceptance-test/issues) and [pull requests](https://github.com/fulldecent/structured-acceptance-test/pulls) to help improve it.
 
 Please help to raise awareness by opening an issue with [your favorite static analysis tool](https://en.wikipedia.org/wiki/List_of_tools_for_static_code_analysis) to support this format.
 
 Please open an issue with your favorite integrated development environment or source code sharing tool to request interoperability with this format.
+
+-----
+
+Please add your own projects below!
+
+Supporting acceptance testing programs:
+
+ * YOUR NAME HERE (STAT VERSION NUMBER SUPPORTED)
+
+Supporting consumers:
+
+ * Interactive file editors (IDEs, text editors, word processors, image editors)
+   * YOUR NAME HERE
+ * Command-line reporting tools (unit test reports)
+   * YOUR NAME HERE
+ * Source code management / content management systems
+   * YOUR NAME HERE

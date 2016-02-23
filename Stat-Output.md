@@ -1,70 +1,87 @@
 # Structured Acceptance Test Output
 
-This document is part of the Structured Acceptance Test specification. Please see versioning information and details at [the project main page](README.md).
+This document is part of the Structured Acceptance Test specification, please see versioning information and details at [the project main page](README.md). *Process* refers to a computer program that supports the Structured Acceptance Test standard. *Consumer* refers to something that uses the output of the *process*.
 
 The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMEND, MAY, and OPTIONAL in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
 
 ## Valid output examples
 
-The output format consists of:
-
- * One required "header" part which identifies the acceptance test; and
- * Zero or more "finding" parts which describe a specific problem
-
-Each part MUST be delimited by a new line. An acceptance test MUST choose between Unix-style line endings ("`\n`") and DOS-style line endings ("`\r\n`"). A report consumer MUST accept either format. This is the [Concatenated JSON](https://en.wikipedia.org/wiki/JSON_Streaming) format.
-
-*Please note: a program that supports Structured Acceptance Test SHOULD output each finding as it is found. This allows another program to interpret these findings incrementally.*
-
 ### The simplest valid example
 
 ```json
 {
-  "statVersion": "0.1.0",
+  "statVersion": "0.2.0",
   "name": "Vowel grep"
 }
 ```
 
-*This example indicates that an acceptance test named "Vowel grep" was applied to the requested targets, if any, and no findings were reported. Also, a lack of any findings implies that the acceptance test has passed.*
-
-FIXME: HOW TO KNOW WHICH FILES WERE CONSIDERED?
+This example identifies an acceptance test named "Vowel grep" and does not express and findings. A `pass` outcome is implied.
 
 ### Full-featured example
 
 ```json
 {
-  "statVersion": "0.1.0",
+  "statVersion": "0.2.0",
   "name": "Vowel grep",
   "version": "0.1.0",
   "description": "Ensures that no a's, e's, i's, o's or u's are found",
+  "maintainer": "William Entriken",
+  "email": "github.com@phor.net",
+  "website": "https://github.com/fulldecent/structured-acceptance-test/tree/master/Examples",
+  "repeatability": "Associative"
 }
 {
   "failure": true,
-  "rule": "Bug Risk/Unused Variable",
-  "description": "Unused local variable `foo`",
-  "content": Content,
-  "categories": ["Complexity"],
-  "location": Location,
-  "otherLocations": [Location],
-  "remediation_points": 50000,
-  "severity": Severity,
-  "repeatability": Repeatability
+  "rule": "Vowel used",
+  "description": "Letter a was used",
+  "detail": {"body": "It is not advised to use the letter `a` because only consonants are allowed."},
+  "categories": ["Style"],
+  "location": {
+    "path":"code/hello.txt",
+    "beginLine": 1,
+    "beginColumn": 2,
+    "endLine": 1,
+    "endColumn": 2
+  },
+  "timeToFix": 60,
+  "recommendation": "Replace this with an X",
+  "fixes": [ {
+    "location": {
+      "path":"code/hello.txt",
+      "beginLine": 1,
+      "beginColumn": 2,
+      "endLine": 1,
+      "endColumn": 2
+    },
+    "newText": "X"    
+    }
+  ],
 }
 ```
 
+This example shows the partial output of a process that disallows vowels being applied to a file containing "hello world".
 
 ## Full specification
 
-[REWORD] Engines stream static analysis Issues to STDOUT in JSON format. When possible, results should be emitted as soon as they are computed (streaming, not buffered). Each issue is terminated by the null character (\0 in most programming languages), but can additionally be separated by newlines.
+FIXME: HOW TO KNOW WHICH FILES WERE CONSIDERED?
 
-[REWORD] Unstructured information can be printed on STDERR for the purposes of aiding debugging. Note that STDERR output will only be displayed in the console output when there is a failure, so this approach may not be appropriate for general purpose logging.
+The output is a collection of one **Identification** object and zero or more **Finding** objects which are formatted in [JSON](http://www.json.org/). Each object is [delimited by a new line](https://en.wikipedia.org/wiki/JSON_Streaming).
 
-[REWORD] An engine must exit with a zero exit code to be considered a success. Any nonzero exit code indicates a fatal error in the static analysis and the results for the entire analysis will be discarded (even if some were previously emitted).
+A process MUST either produce output on STDOUT or save to a file. No output other than what is described in this specification is allowed. Note: a program MAY print additional information to STDERR; however, this specification provides no semantics for that additional information.
 
-### The header part
+**CODE CLIMATE NOTE: output must be to STDOUT**
+
+A consumer SHOULD consider the output incomplete if the process returned with an exit code other than zero. A consumer also MAY discard the outcome in this circumstance.
+
+**CODE CLIMATE NOTE: a consumer MUST discard the entire output if the process returned with an exit code other than zero**
+
+A consumer MUST consider an acceptance test *outcome* as `fail` if any finding is presented which represents a failure; otherwise it MUST be `pass`.
+
+### Identification
 
 ```json
 {
-  "statVersion": String,
+  "statVersion": "0.2.0",
   "name": String,
   "version": String,
   "description": String,
@@ -75,30 +92,32 @@ FIXME: HOW TO KNOW WHICH FILES WERE CONSIDERED?
 }
 ```
 
- * `statVersion` &mdash; **Required** &mdash; The version of Structured Acceptance Test with which this report complies
- * `name` &mdash; **Required** &mdash; Identification of the process which is performing validation
+ * `statVersion` &mdash; **Required** &mdash; The version of Structured Acceptance Test against which this output is valid
+ * `name` &mdash; **Required** &mdash; Identification of the acceptance test process
    * For automated tools, this MUST be the name of the tool
    * For manual review, this SHOULD refer to the name of the test and validation procedure performed
- * `version` &mdash; **Optional** &mdash; The version of the validation process program or test procedure
- * `description` &mdash; **Optional** &mdash; A brief explanation of the validation process
- * `maintainer` &mdash; **Optional** &mdash; The name of a person responsible for the validation process
+ * `version` &mdash; **Optional** &mdash; The version of the acceptance test process
+ * `description` &mdash; **Optional** &mdash; A brief explanation of the acceptance test process
+ * `maintainer` &mdash; **Optional** &mdash; The name of a person responsible for the acceptance test process
  * `email` &mdash; **Optional** &mdash; Contact email address for the maintainer
- * `website` &mdash; **Optional** &mdash; Contact website for the validation process
- * `repeatability` &mdash; **Optional** &mdash; *See repeatability below*
+ * `website` &mdash; **Optional** &mdash; Contact website for the acceptance test process
+ * `repeatability` &mdash; **Optional** &mdash; A guarantee of whether the same validation output can be expected in future validation, see notes below
 
-**CODE CLIMATE NOTE: all fields are required except repeatability**
+**CODE CLIMATE NOTE: everything is required except repeatability**
 
 #### Repeatability
 
-Repeatability is a guarantee that the same validation results would occur in the future if applied to the same, or a similar set of targets. Because validation may be expensive, this will allow certain validations to be skipped in the future.
+Repeatability is a guarantee that the same output MUST occur if the test is applied again to the same, or a similar set of targets. Because validation MAY be expensive, this will allow certain validations to be skipped in the future.
 
-A report consumer MUST NOT consider a guarantee from one validation `name` and `version` to be valid with a different one.
+A consumer MUST NOT consider a repeatability guarantee from one validation `name` and `version` to be valid with another.
 
-Repeatability must be one of the following strings:
+Repeatability MUST be one of the following strings:
 
- * `Volatile` -- validations MAY change when repeating validation on the identical targets. Example: a web link checker, or package manager version checker. **This is the implicit default if not specified.**
- * `Repeatable` -- if the same set of targets is provided, the validation results are guaranteed to be identical
- * `Associative` -- the validation result of targets [a, b] is guaranteed to be the sum of validation for [a] and [b] -- in other words, if only one file in changed, only that file need be tested
+ * `Volatile` &mdash; Findings MAY change when repeating validation on the identical targets. Example: a web link checker, or package manager version checker. **This is the implicit default if not specified.**
+ * `Repeatable` &mdash; Findings MUST be identical if the program is run again with the same inputs.
+ * `Associative` &mdash; Findings for targets [a, b] MUST equal the union of findings for [a] and [b] -- in other words, if only one file in changed, only that file need be tested.
+
+Note: `Associative` is the strongest and most useful guarantee.
 
 ### The finding part
 
@@ -111,18 +130,22 @@ Repeatability must be one of the following strings:
   "categories": [Category],
   "location": Location,
   "timeToFix": Number,
-  "recommendations": [Recommendation]
+  "recommendation": String,
+  "fixes": [Fix]
 }
 ```
 
-* `failure` &mdash; **Required** &mdash; `true` if this finding causes the target to fail the overall acceptance test; `false` otherwise
+* `failure` &mdash; **Required** &mdash; `true` if this finding causes the output to be `fail`; `false` otherwise
 * `rule` &mdash; **Required** &mdash; A succinct name which describes the rule which applies to this finding
 * `description` &mdash; **Required** &mdash; An explanation of the finding
-* `detail` &mdash; **Optional** &mdash; *See Detail below*
-* `categories` &mdash; **Optional** &mdash; *See Category below*
-* `location` &mdash; **Optional** &mdash; *See Location below*
+* `detail` &mdash; **Optional** &mdash; See *Detail* below
+* `categories` &mdash; **Optional** &mdash; See *Category* below
+* `location` &mdash; **Optional** &mdash; See *Location* below
 * `timeToFix` &mdash; **Optional** &mdash; The estimated amount of time it would take a knowledgable human to fix this problem, in seconds
-* `recommendations` &mdash; **Optional** &mdash; *See Recommendation below*
+* `recommendation` &mdash; **Optional** &mdash; Explanation of an act, using imperative language (eg. "Add a semicolon", "Use the passive voice"), which would fix this finding
+* `fixes` &mdash; **Optional** &mdash; See *Fix* below
+
+**CODE CLIMATE NOTE: categories and location are required**
 
 #### Detail
 
@@ -169,8 +192,6 @@ Category is a string that classifies the finding into a taxonomy. The taxonomy i
 
 #### Location
 
-*Note: location is optional but SHOULD be provided. If it is not provided then the finding applies to the entirety of all targets. An example would be a customer who complains "it is OK but it needs more UMPH." Such a validation and finding is a valid complaint which can be properly represented in the STAT format.*
-
 ```json
 {
   "path": String,
@@ -181,34 +202,36 @@ Category is a string that classifies the finding into a taxonomy. The taxonomy i
 }
 ```
 
-* `path` &mdash; **Required** &mdash; The file path which this finding refers to, which MUST begin exactly with one of the `targetPaths` from the validation input
+* `path` &mdash; **Required** &mdash; The file path to which this finding applies, which MUST begin exactly with one of the `targetPaths` from the [input](Stat-Input.md)
 * `beginLine` &mdash; **Optional** &mdash; The first line of text affected (numbering starts with one), defaults to one
 * `beginColumn` &mdash; **Optional** &mdash; The first column of text affected (numbering starts with one), defaults to one
 * `endColumn` &mdash; **Optional** &mdash; The last column of text affected (numbering starts with one), defaults to the last
 * `endLine` &mdash; **Optional** &mdash; The last line of text affected (numbering starts with one), defaults to the last
 
-Note: if `beginLine` and `endLine` are both `1`, then the columns are to be interpreted as byte offsets (still one-based). For example, a WAVE sound file containing `riff` at the beginning (it should be `RIFF`) would be identified by the location:
+Note: if `beginLine` and `endLine` are both `1`, then `beginColumn` and `endColumn` SHALL represent byte offsets (still one-based). For example, a WAVE sound file containing `riff` at the beginning (it should be `RIFF`) would be identified by the location:
 
     {"path":file,"beginLine":1,"beginColumn":1,"endLine":1,"endColumn":4}
 
-#### Recommendation
+Notes regarding *findings* that omit *location*:
 
-A `recommendation` is a proposed way to fix a finding.
+ * The *consumer* must consider the *finding* to apply to the entirety of all targets.
+ * A valid example is a failed check for the existence of a file (note: a location may not refer to an non-existent file)
+ * A process which guarantees `Associative` repeatability MUST NOT include findings that omit location.
+
+#### Fix
+
+A *fix* is a proposed way to implement a *recommendation*. If a fix is provided, then a recommendation MUST be provided.
 
 ```json
 {
-  "correction": String,
   "location": Location,
-  "replacement": String
+  "newText": String
 }
 ```
 
-* `correction` &mdash; **Required** &mdash; Explanation on an act, using imperative language (eg. "Add a semicolon", "Use the passive voice"), which would fix this finding.
-* `location` &mdash; **Optional** &mdash; A certain section of a targeted file
-* `replacement` &mdash; **Optional** &mdash; New text which is proposed to replace the section from `location`
-
-If `replacement` is provided then `location` MUST be provided.
+* `location` &mdash; **Required** &mdash; Where the recommendation can be applied
+* `newText` &mdash; **Optional** &mdash; New text which may be spliced into the *location*
 
 ### Extensibility
 
-New keys MAY be added by the validation process to extend any object with proprietary information. The report consumer MUST ignore such additional information it does not understand.
+Each object in this specification may have extra keys introduced by the process with proprietary information. The report consumer MUST ignore such additional information it does not understand.
