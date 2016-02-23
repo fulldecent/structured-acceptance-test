@@ -13,9 +13,9 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 }
 ```
 
-**Here, the process is not provided any targets!** The process MUST decide whether this results in a `pass` or `fail` outcome.
+**Here, the *process* is not provided any targets!** The *process* MUST decide whether this results in a `pass` or `fail` outcome.
 
-This example is useful because it is the simplest way to cause a process to output its identification. (See the [STAT Output / identification part specification](Stat-Output.md#the-identification-part) for details.)
+This example is useful because it is the simplest way to cause a *process* to output its identification. (See the [STAT Output / identification part specification](Stat-Output.md#the-identification-part) for details.)
 
 ### Full-featured example
 

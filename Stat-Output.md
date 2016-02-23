@@ -59,21 +59,21 @@ This example identifies an acceptance test named "Vowel grep" and does not expre
 }
 ```
 
-This example shows the partial output of a process that disallows vowels being applied to a file containing "hello world".
+This example shows the partial output of a *process* that disallows vowels being applied to a file containing "hello world".
 
 ## Full specification
 
 The output is a collection of one **Identification** object and zero or more **Finding** objects which are formatted in [JSON](http://www.json.org/). Each object is [delimited by a new line](https://en.wikipedia.org/wiki/JSON_Streaming).
 
-A process MUST either produce output on STDOUT or save to a file. No output other than what is described in this specification is allowed. Note: a program MAY print additional information to STDERR; however, this specification provides no semantics for that additional information.
+A *process* MUST either produce output on STDOUT or save to a file. No output other than what is described in this specification is allowed. Note: a program MAY print additional information to STDERR; however, this specification provides no semantics for that additional information.
 
 **CODE CLIMATE NOTE: output must be to STDOUT**
 
-A consumer SHOULD consider the output incomplete if the process returned with an exit code other than zero. A consumer also MAY discard the outcome in this circumstance.
+A *consumer* SHOULD consider the output incomplete if the *process* returned with an exit code other than zero. A *consumer* also MAY discard the outcome in this circumstance.
 
-**CODE CLIMATE NOTE: a consumer MUST discard the entire output if the process returned with an exit code other than zero**
+**CODE CLIMATE NOTE: a *consumer* MUST discard the entire output if the *process* returned with an exit code other than zero**
 
-A consumer MUST consider an acceptance test *outcome* as `fail` if any finding is presented which represents a failure; otherwise it MUST be `pass`.
+A *consumer* MUST consider an acceptance test *outcome* as `fail` if any finding is presented which represents a failure; otherwise it MUST be `pass`.
 
 ### Identification
 
@@ -91,14 +91,14 @@ A consumer MUST consider an acceptance test *outcome* as `fail` if any finding i
 ```
 
  * `statVersion` &mdash; **Required** &mdash; The version of Structured Acceptance Test against which this output is valid
- * `name` &mdash; **Required** &mdash; Identification of the acceptance test process
+ * `name` &mdash; **Required** &mdash; Identification of the acceptance test *process*
    * For automated tools, this MUST be the name of the tool
    * For manual review, this SHOULD refer to the name of the test and validation procedure performed
- * `version` &mdash; **Optional** &mdash; The version of the acceptance test process
- * `description` &mdash; **Optional** &mdash; A brief explanation of the acceptance test process
- * `maintainer` &mdash; **Optional** &mdash; The name of a person responsible for the acceptance test process
+ * `version` &mdash; **Optional** &mdash; The version of the acceptance test *process*
+ * `description` &mdash; **Optional** &mdash; A brief explanation of the acceptance test *process*
+ * `maintainer` &mdash; **Optional** &mdash; The name of a person responsible for the acceptance test *process*
  * `email` &mdash; **Optional** &mdash; Contact email address for the maintainer
- * `website` &mdash; **Optional** &mdash; Contact website for the acceptance test process
+ * `website` &mdash; **Optional** &mdash; Contact website for the acceptance test *process*
  * `repeatability` &mdash; **Optional** &mdash; A guarantee of whether the same validation output can be expected in future validation, see notes below
 
 **CODE CLIMATE NOTE: everything is required except repeatability**
@@ -107,7 +107,7 @@ A consumer MUST consider an acceptance test *outcome* as `fail` if any finding i
 
 Repeatability is a guarantee that the same output MUST occur if the test is applied again to the same, or a similar set of targets. Because validation MAY be expensive, this will allow certain validations to be skipped in the future.
 
-A consumer MUST NOT consider a repeatability guarantee from one validation `name` and `version` to be valid with another.
+A *consumer* MUST NOT consider a repeatability guarantee from one validation `name` and `version` to be valid with another.
 
 Repeatability MUST be one of the following strings:
 
@@ -216,7 +216,7 @@ Notes regarding *findings* that omit *location*:
 
  * The *consumer* must consider the *finding* to apply to the entirety of all targets.
  * A valid example is a failed check for the existence of a file (note: a location may not refer to an non-existent file)
- * A process which guarantees `Associative` repeatability MUST NOT include findings that omit location.
+ * A *process* which guarantees `Associative` repeatability MUST NOT include findings that omit location.
 
 #### Fix
 
@@ -234,4 +234,4 @@ A *fix* is a proposed way to implement a *recommendation*. If a fix is provided,
 
 ### Extensibility
 
-Each object in this specification may have extra keys introduced by the process with proprietary information. The report consumer MUST ignore such additional information it does not understand.
+Each object in this specification may have extra keys introduced by the *process* with proprietary information. The report *consumer* MUST ignore such additional information it does not understand.
