@@ -7,7 +7,7 @@ There are two parts to this specification:
  * [STAT Input](Stat-Input.md) -- defines what *targets* the *process* should test
  * [STAT Output](Stat-Output.md) -- identifies the test *process* and expresses the *outcome*, *findings* and *recommendations*
 
-A computer program is said to *support* the Structured Acceptance Test standard if it accepts any valid STAT Input and it produces a valid STAT Output. It is recommended that command-line computer programs use the `--stat-file=<INPUT>` switch to support the STAT standard.
+A computer program is said to support the Structured Acceptance Test standard if it accepts any valid STAT Input and it produces a valid STAT Output. It is recommended that command-line computer programs use the `--stat-file=<INPUT>` switch to support the STAT standard.
 
 # Who can use it?
 
@@ -47,7 +47,7 @@ The acceptance testing *outcome*, *findings* and *recommendations* can be used (
 
 **If your acceptance testing *process* uses a standardized output format then consumers can make better use of it.**
 
-Integrations are amazing. They allow `clang` compilers to show compile errors in your integrated development environment, they allow spelling errors to be underlined in your word processor and they show up as red flags when you review a pull request. But what if *all* of these validations can be shown *everywhere* they are relevant? Standardization supports this.
+Integrations are amazing. They allow `clang` compilers to show compile errors in your integrated development environment, they allow spelling errors to be underlined in your word processor and they show up as red flags when you review a pull request. But what if *all* of these validations can be shown *everywhere* they are relevant? Standardization allows this.
 
 This is the first widely-applicable standardization of its type so [XKCD 927](https://xkcd.com/927/) does not apply.
 
