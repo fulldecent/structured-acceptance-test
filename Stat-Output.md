@@ -10,7 +10,7 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 ```json
 {
-  "statVersion": "0.2.0",
+  "statVersion": "0.2.1",
   "name": "Vowel grep"
 }
 ```
@@ -21,7 +21,7 @@ This example identifies an acceptance test named "Vowel grep" and does not expre
 
 ```json
 {
-  "statVersion": "0.2.0",
+  "statVersion": "0.2.1",
   "name": "Vowel grep",
   "version": "0.1.0",
   "description": "Ensures that no a's, e's, i's, o's or u's are found",
@@ -83,7 +83,7 @@ Note: below is a very simple shell script that processes STAT Output and returns
 
 ```json
 {
-  "statVersion": "0.2.0",
+  "statVersion": "0.2.1",
   "name": String,
   "version": String,
   "description": String,
