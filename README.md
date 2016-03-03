@@ -63,9 +63,9 @@ This standard is currently version 0.3.1. We follow [Semantic Versioning](http:/
  - [x] Defines the output format for the *outcome*, *findings* and *recommendations*
  - [x] Follows the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml)
  - [x] Supports real-time, incremental reporting
- - [ ] An example computer program is produced that supports STAT
+ - [x] An example computer program is produced that supports STAT
  - [ ] An example computer program is produced that reads and reports the above output
- - [ ] Useful computer program is produced (or transformed) to support STAT
+ - [x] Useful computer program is produced (or transformed) to support STAT
  - [x] Compatibility is established with [Code Climate Engine specification](https://github.com/codeclimate/spec)
 
 # Copyright
@@ -86,6 +86,7 @@ Please add your own projects below!
 
 Supporting acceptance testing programs:
 
+ * [web-puc - Web package update checker](https://github.com/fulldecent/web-puc) / version 0.3.1
  * YOUR NAME HERE (STAT VERSION NUMBER SUPPORTED)
 
 Supporting consumers:
