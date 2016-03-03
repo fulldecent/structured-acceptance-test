@@ -55,7 +55,7 @@ Specific features of this specification include:
 
 # Project Status
 
-This standard is currently version 0.3.0. We follow [Semantic Versioning](http://semver.org/).
+This standard is currently version 0.3.1. We follow [Semantic Versioning](http://semver.org/).
 
 **You can start using this standard today.** A few backwards-incompatible changes may be introduced before the 1.0.0. This will be a candidate for 1.0.0 release when all below items are completed.
 

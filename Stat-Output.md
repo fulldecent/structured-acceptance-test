@@ -10,21 +10,21 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 ```json
 {
+  "statVersion": "0.3.1",
   "process": {
-    "statVersion": "0.3.0",
     "name": "Vowel grep"    
   }
 }
 ```
 
-This example identifies an acceptance test named "Vowel grep" and does not express and findings. A `pass` outcome is implied.
+This example identifies an acceptance test named "Vowel grep" and does not express any findings. A `pass` outcome is implied.
 
 ### Full-featured example
 
 ```json
 {
+  "statVersion": "0.3.1",
   "process": {
-    "statVersion": "0.3.0",
     "name": "Vowel grep",
     "version": "0.1.0",
     "description": "Ensures that no a's, e's, i's, o's or u's are found",
@@ -78,11 +78,13 @@ The output is an object containing a **Process** object and zero or more **Findi
 
 ```json
 {
+  "statVersion": "0.3.1",
   "process": Process,
   "findings": [Finding]
 }
 ```
 
+* `statVersion` &mdash; **Required** &mdash; The version of Structured Acceptance Test against which this output is valid
 * `process` &mdash; **Required** &mdash; Identification of the *process* which is doing testing
 * `findings` &mdash; **Optional** &mdash; A set of observations reported by the *process*, or `[]` if not specified
 
@@ -102,7 +104,6 @@ Note: below is a very simple shell script that processes STAT Output and returns
 
 ```json
 {
-  "statVersion": "0.3.0",
   "name": String,
   "version": String,
   "description": String,
@@ -113,7 +114,6 @@ Note: below is a very simple shell script that processes STAT Output and returns
 }
 ```
 
- * `statVersion` &mdash; **Required** &mdash; The version of Structured Acceptance Test against which this output is valid
  * `name` &mdash; **Required** &mdash; Identification of the acceptance test *process*
    * For automated tools, this MUST be the name of the tool
    * For manual review, this SHOULD refer to the name of the test and validation procedure performed
