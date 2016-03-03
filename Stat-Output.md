@@ -10,7 +10,7 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 ```json
 {
-  "statVersion": "0.2.1",
+  "statVersion": "0.3.0",
   "name": "Vowel grep"
 }
 ```
@@ -21,7 +21,7 @@ This example identifies an acceptance test named "Vowel grep" and does not expre
 
 ```json
 {
-  "statVersion": "0.2.1",
+  "statVersion": "0.3.0",
   "name": "Vowel grep",
   "version": "0.1.0",
   "description": "Ensures that no a's, e's, i's, o's or u's are found",
@@ -83,7 +83,7 @@ Note: below is a very simple shell script that processes STAT Output and returns
 
 ```json
 {
-  "statVersion": "0.2.1",
+  "statVersion": "0.3.0",
   "name": String,
   "version": String,
   "description": String,
@@ -116,7 +116,7 @@ A *consumer* MUST NOT consider a repeatability guarantee from one validation `na
 Repeatability MUST be one of the following strings:
 
  * `Volatile` &mdash; Findings MAY change when repeating validation on the identical targets. Example: a web link checker, or package manager version checker. **This is the implicit default if not specified.**
- * `Repeatable` &mdash; Findings MUST be identical if the program is run again with the same inputs.
+ * `Repeatable` &mdash; Findings MUST be identical if the program is run again with the same inputs. ("Inputs" is not specified by this standard.)
  * `Associative` &mdash; Findings for targets [a, b] MUST equal the union of findings for [a] and [b] -- in other words, if only one file in changed, only that file need be tested.
 
 Note: `Associative` is the strongest and most useful guarantee.
@@ -206,7 +206,7 @@ Category is a string that classifies the finding into a taxonomy. The taxonomy i
 }
 ```
 
-* `path` &mdash; **Required** &mdash; The file path to which this finding applies, which MUST begin exactly with one of the `targetPaths` from the [input](Stat-Input.md)
+* `path` &mdash; **Required** &mdash; The file path to which this finding applies
 * `beginLine` &mdash; **Optional** &mdash; The first line of text affected (numbering starts with one), defaults to one
 * `beginColumn` &mdash; **Optional** &mdash; The first column of text affected (numbering starts with one), defaults to one
 * `endColumn` &mdash; **Optional** &mdash; The last column of text affected (numbering starts with one), defaults to the last
