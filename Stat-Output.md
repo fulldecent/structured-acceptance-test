@@ -74,7 +74,7 @@ This example shows the partial output of a *process* that disallows vowels being
 
 ## Full specification
 
-The output is an object containing a **Process** object and zero or more **Finding** objects which are formatted in [JSON](http://www.json.org/). Each finding SHOULD be delimited by a new line. A computer program with STAT-compliant output SHOULD immediately output each finding as available (e.g. use `flush()`). This allows the `consumer` to begin processing the results right away.
+The output is an object containing a **Process** object and zero or more **Finding** objects which are formatted in [JSON](http://www.json.org/).
 
 ```json
 {
@@ -86,17 +86,17 @@ The output is an object containing a **Process** object and zero or more **Findi
 * `process` &mdash; **Required** &mdash; Identification of the *process* which is doing testing
 * `findings` &mdash; **Optional** &mdash; A set of observations reported by the *process*, or `[]` if not specified
 
-**CODE CLIMATE NOTE: output must be to STDOUT**
-
-A *consumer* SHOULD consider the output incomplete if the *process* returned with an exit code other than zero. A *consumer* also MAY discard the outcome in this circumstance.
-
-**CODE CLIMATE NOTE: a *consumer* MUST discard the entire output if the *process* returned with an exit code other than zero**
+Each finding SHOULD be delimited by a new line. A computer program with STAT-compliant output SHOULD immediately output each finding as available (e.g. use `flush()`). This allows the `consumer` to begin processing the results right away.
 
 A *consumer* MUST consider an acceptance test *outcome* as `fail` if any finding is presented which represents a failure; otherwise it MUST be `pass`.
+
+A STAT-compliant computer program MUST exit with a return status of zero if the testing was completed or non-zero if a problem with the testing software occurred.
 
 Note: below is a very simple shell script that processes STAT Output and returns a non-zero status if the `outcome` is fail. It allows you to easily integrate with certain unit test and continuous integration environments.
 
     ! pcregrep -qM '"failure"\s*:\s*true'
+
+**CODE CLIMATE NOTE: output must be to STDOUT, other various information may be sent to STDERR, all findings will be ignored if the return status is non-zero **
 
 ### Process
 
