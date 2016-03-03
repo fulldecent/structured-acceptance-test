@@ -10,8 +10,10 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 ```json
 {
-  "statVersion": "0.3.0",
-  "name": "Vowel grep"
+  "process": {
+    "statVersion": "0.3.0",
+    "name": "Vowel grep"    
+  }
 }
 ```
 
@@ -21,41 +23,50 @@ This example identifies an acceptance test named "Vowel grep" and does not expre
 
 ```json
 {
-  "statVersion": "0.3.0",
-  "name": "Vowel grep",
-  "version": "0.1.0",
-  "description": "Ensures that no a's, e's, i's, o's or u's are found",
-  "maintainer": "William Entriken",
-  "email": "github.com@phor.net",
-  "website": "https://github.com/fulldecent/structured-acceptance-test/tree/master/Examples",
-  "repeatability": "Associative"
-}
-{
-  "failure": true,
-  "rule": "Vowel used",
-  "description": "Letter a was used",
-  "detail": {"body": "It is not advised to use the letter `a` because only consonants are allowed."},
-  "categories": ["Style"],
-  "location": {
-    "path":"code/hello.txt",
-    "beginLine": 1,
-    "beginColumn": 2,
-    "endLine": 1,
-    "endColumn": 2
+  "process": {
+    "statVersion": "0.3.0",
+    "name": "Vowel grep",
+    "version": "0.1.0",
+    "description": "Ensures that no a's, e's, i's, o's or u's are found",
+    "maintainer": "William Entriken",
+    "email": "github.com@phor.net",
+    "website": "https://github.com/fulldecent/structured-acceptance-test/tree/master/Examples",
+    "repeatability": "Associative"
   },
-  "timeToFix": 60,
-  "recommendation": "Replace this with an X",
-  "fixes": [ {
-    "location": {
-      "path":"code/hello.txt",
-      "beginLine": 1,
-      "beginColumn": 2,
-      "endLine": 1,
-      "endColumn": 2
-    },
-    "newText": "X"    
+  "findings": [
+    {
+      "failure": true,
+      "rule": "Vowel used",
+      "description": "Letter a was used",
+      "detail": {
+        "body": "Don't use `a` because only consonants are allowed."
+      },
+      "categories": [
+        "Style"
+      ],
+      "location": {
+        "path": "code\/hello.txt",
+        "beginLine": 1,
+        "beginColumn": 2,
+        "endLine": 1,
+        "endColumn": 2
+      },
+      "timeToFix": 60,
+      "recommendation": "Replace this with an X",
+      "fixes": [
+        {
+          "location": {
+            "path": "code\/hello.txt",
+            "beginLine": 1,
+            "beginColumn": 2,
+            "endLine": 1,
+            "endColumn": 2
+          },
+          "newText": "X"
+        }
+      ]
     }
-  ],
+  ]
 }
 ```
 
@@ -63,9 +74,17 @@ This example shows the partial output of a *process* that disallows vowels being
 
 ## Full specification
 
-The output is a collection of one **Identification** object and zero or more **Finding** objects which are formatted in [JSON](http://www.json.org/). Each object is [delimited by a new line](https://en.wikipedia.org/wiki/JSON_Streaming).
+The output is an object containing a **Process** object and zero or more **Finding** objects which are formatted in [JSON](http://www.json.org/). Each finding SHOULD be delimited by a new line. A computer program with STAT-compliant output SHOULD immediately output each finding as available (e.g. use `flush()`). This allows the `consumer` to begin processing the results right away.
 
-A *process* MUST either produce output on STDOUT or save to a file. No output other than what is described in this specification is allowed. Note: a program MAY print additional information to STDERR; however, this specification provides no semantics for that additional information.
+```json
+{
+  "process": Process,
+  "findings": [Finding]
+}
+```
+
+* `process` &mdash; **Required** &mdash; Identification of the *process* which is doing testing
+* `findings` &mdash; **Optional** &mdash; A set of observations reported by the *process*, or `[]` if not specified
 
 **CODE CLIMATE NOTE: output must be to STDOUT**
 
@@ -79,7 +98,7 @@ Note: below is a very simple shell script that processes STAT Output and returns
 
     ! pcregrep -qM '"failure"\s*:\s*true'
 
-### Identification
+### Process
 
 ```json
 {
@@ -121,7 +140,7 @@ Repeatability MUST be one of the following strings:
 
 Note: `Associative` is the strongest and most useful guarantee.
 
-### The finding part
+### Finding
 
 ```json
 {
