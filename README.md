@@ -64,7 +64,7 @@ This standard is currently version 0.3.1. We follow [Semantic Versioning](http:/
  - [x] Follows the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml)
  - [x] Supports real-time, incremental reporting
  - [x] An example computer program is produced that supports STAT
- - [ ] An example computer program is produced that reads and reports the above output
+ - [ ] An example computer program is produced that reads and reports the above output (Issue #6)
  - [x] Useful computer program is produced (or transformed) to support STAT
  - [x] Compatibility is established with [Code Climate Engine specification](https://github.com/codeclimate/spec)
 
