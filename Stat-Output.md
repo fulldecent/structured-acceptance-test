@@ -10,7 +10,7 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 ```json
 {
-  "statVersion": "0.3.1",
+  "statVersion": "0.4.0",
   "process": {
     "name": "Vowel grep"    
   }
@@ -23,7 +23,7 @@ This example identifies an acceptance test named "Vowel grep" and does not expre
 
 ```json
 {
-  "statVersion": "0.3.1",
+  "statVersion": "0.4.0",
   "process": {
     "name": "Vowel grep",
     "version": "0.1.0",
@@ -74,11 +74,11 @@ This example shows the partial output of a *process* that disallows vowels being
 
 ## Full specification
 
-The output is an object containing a **Process** object and zero or more **Finding** objects which are formatted in [JSON](http://www.json.org/).
+The output is a [JSON-formatted](http://www.json.org/) object containing a **Process** object and zero or more **Finding** objects.
 
 ```json
 {
-  "statVersion": "0.3.1",
+  "statVersion": "0.4.0",
   "process": Process,
   "findings": [Finding]
 }
@@ -90,15 +90,9 @@ The output is an object containing a **Process** object and zero or more **Findi
 
 Each finding SHOULD be delimited by a new line. A computer program with STAT-compliant output SHOULD immediately output each finding as available (e.g. use `flush()`). This allows the `consumer` to begin processing the results right away.
 
-A *consumer* MUST consider an acceptance test *outcome* as `fail` if any finding is presented which represents a failure; otherwise it MUST be `pass`.
+A *consumer* should ignore the entire STAT Output if it is not valid JSON. This may occur, for example, if the *process* was interrupted or had an internal error.
 
-A STAT-compliant computer program MUST exit with a return status of zero if the testing was completed or non-zero if a problem with the testing software occurred.
-
-Note: below is a very simple shell script that processes STAT Output and returns a non-zero status if the `outcome` is fail. It allows you to easily integrate with certain unit test and continuous integration environments.
-
-    ! pcregrep -qM '"failure"\s*:\s*true'
-
-**CODE CLIMATE NOTE: output must be to STDOUT, other various information may be sent to STDERR, all findings will be ignored if the return status is non-zero **
+A STAT-compliant computer program MUST produce STAT-compliant output on STDOUT and MUST exit with a return status of zero if no *failure* *findings* were reported, or non-zero otherwise.
 
 ### Process
 
