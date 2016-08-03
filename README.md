@@ -88,6 +88,7 @@ Supporting acceptance testing programs:
 
  * [web-puc - Web package update checker](https://github.com/fulldecent/web-puc) / version 0.3.1
  * [Line ending linter](https://github.com/mcandre/lili) / version 0.4.0
+ * [Column width linter](https://github.com/mcandre/cowl) / version 0.4.0
  * YOUR NAME HERE (STAT VERSION NUMBER SUPPORTED)
 
 Supporting consumers:
