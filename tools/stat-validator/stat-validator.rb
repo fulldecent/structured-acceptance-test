@@ -28,6 +28,6 @@ filename =
     else
         ARGV[0]
     end
-schema_path = File.dirname(__FILE__) + '/../statJsonSchema.json'
+schema_path = File.dirname(__FILE__) + '/../../statJsonSchema.json'
 
 puts JSON::Validator.fully_validate(schema_path, filename, :uri => true)
