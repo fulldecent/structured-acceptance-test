@@ -173,7 +173,7 @@ Note: `Associative` is the strongest and most useful guarantee.
 }
 ```
 
- * `detail` &mdash; **Required** &mdash; A markdown-formatted, detailed explanation the finding, which may include links to further information
+ * `body` &mdash; **Required** &mdash; A markdown-formatted, detailed explanation the finding, which may include links to further information
  * `trace` &mdash; **Optional** &mdash; An ordered list of `Location`s which provide context to the finding, with the first being the most closely related
 
 #### Category
