@@ -48,10 +48,10 @@ This is the first widely-applicable standardization of its type so [XKCD 927](ht
 
 Specific features of this specification include:
 
- * **It is simple**, a few lines of Ruby can translate `gcc`, `clang` or `aspell` output into the required format
- * **The format is extensible**, any acceptance testing *process* can use this format
- * **Validation output is streamable** and available to the reporting tool incrementally
- * **Repeatability** is specified
+ * **It is simple**, a few lines of Ruby can translate `gcc`, `clang` or `aspell` output into the required format.
+ * **The format is extensible**, any acceptance testing *process* can use this format.
+ * **Validation output is streamable** and available to the reporting tool incrementally.
+ * **Repeatability** is specified.
 
 # Project Status
 
