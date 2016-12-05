@@ -55,7 +55,7 @@ Specific features of this specification include:
 
 # Project Status
 
-This standard is currently version 0.4.0. We follow [Semantic Versioning](http://semver.org/).
+This standard is currently version 1.0.0. We follow [Semantic Versioning](http://semver.org/).
 
 **You can start using this standard today.** A few backwards-incompatible changes may be introduced before the 1.0.0. This will be a candidate for 1.0.0 release when all below items are completed.
 
@@ -86,10 +86,10 @@ Please add your own projects below!
 
 Supporting acceptance testing programs:
 
- * [web-puc - Web package update checker](https://github.com/fulldecent/web-puc) / version 0.3.1
- * [Line ending linter](https://github.com/mcandre/lili) / version 0.4.0
- * [Column width linter](https://github.com/mcandre/cowl) / version 0.4.0
- * YOUR NAME HERE (STAT VERSION NUMBER SUPPORTED)
+ * [web-puc - Web package update checker](https://github.com/fulldecent/web-puc)
+ * [Line ending linter](https://github.com/mcandre/lili)
+ * [Column width linter](https://github.com/mcandre/cowl)
+ * YOUR NAME HERE
 
 Supporting consumers:
 
