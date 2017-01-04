@@ -57,8 +57,6 @@ Specific features of this specification include:
 
 This standard is currently version 1.0.0. We follow [Semantic Versioning](http://semver.org/).
 
-**You can start using this standard today.** A few backwards-incompatible changes may be introduced before the 1.0.0. This will be a candidate for 1.0.0 release when all below items are completed.
-
  - [x] Defines the input format to select computer files
  - [x] Defines the output format for the *outcome*, *findings* and *recommendations*
  - [x] Follows the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml)
