@@ -88,7 +88,7 @@ The output is a [JSON-formatted](http://www.json.org/) object containing a **Pro
 * `process` &mdash; **Required** &mdash; Identification of the *process* which is doing testing
 * `findings` &mdash; **Optional** &mdash; A set of observations reported by the *process*, or `[]` if not specified
 
-Each finding SHOULD be delimited by a new line. A computer program with STAT-compliant output SHOULD immediately output each finding as available (e.g. use `flush()`). This allows the `consumer` to begin processing the results right away.
+INCREMENTAL OUTPUT: Each finding SHOULD be delimited by a new line. A computer program with STAT-compliant output SHOULD immediately output each finding as available (e.g. use `flush()`). This allows the `consumer` to begin processing the results right away.
 
 A *consumer* should ignore the entire STAT Output if it is not valid JSON. This may occur, for example, if the *process* was interrupted or had an internal error.
 
