@@ -10,7 +10,7 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 ```json
 {
-  "statVersion": "0.4.0",
+  "statVersion": "1.0.0",
   "process": {
     "name": "Vowel grep"    
   }
@@ -23,7 +23,7 @@ This example identifies an acceptance test named "Vowel grep" and does not expre
 
 ```json
 {
-  "statVersion": "0.4.0",
+  "statVersion": "1.0.0",
   "process": {
     "name": "Vowel grep",
     "version": "0.1.0",
@@ -78,7 +78,7 @@ The output is a [JSON-formatted](http://www.json.org/) object containing a **Pro
 
 ```json
 {
-  "statVersion": "0.4.0",
+  "statVersion": "1.0.0",
   "process": Process,
   "findings": [Finding]
 }
@@ -88,7 +88,7 @@ The output is a [JSON-formatted](http://www.json.org/) object containing a **Pro
 * `process` &mdash; **Required** &mdash; Identification of the *process* which is doing testing
 * `findings` &mdash; **Optional** &mdash; A set of observations reported by the *process*, or `[]` if not specified
 
-Each finding SHOULD be delimited by a new line. A computer program with STAT-compliant output SHOULD immediately output each finding as available (e.g. use `flush()`). This allows the `consumer` to begin processing the results right away.
+INCREMENTAL OUTPUT: Each finding SHOULD be delimited by a new line. A computer program with STAT-compliant output SHOULD immediately output each finding as available (e.g. use `flush()`). This allows the `consumer` to begin processing the results right away.
 
 A *consumer* should ignore the entire STAT Output if it is not valid JSON. This may occur, for example, if the *process* was interrupted or had an internal error.
 
@@ -173,7 +173,7 @@ Note: `Associative` is the strongest and most useful guarantee.
 }
 ```
 
- * `detail` &mdash; **Required** &mdash; A markdown-formatted, detailed explanation the finding, which may include links to further information
+ * `body` &mdash; **Required** &mdash; A markdown-formatted, detailed explanation the finding, which may include links to further information
  * `trace` &mdash; **Optional** &mdash; An ordered list of `Location`s which provide context to the finding, with the first being the most closely related
 
 #### Category

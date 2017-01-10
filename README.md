@@ -48,16 +48,14 @@ This is the first widely-applicable standardization of its type so [XKCD 927](ht
 
 Specific features of this specification include:
 
- * **It is simple**, a few lines of Ruby can translate `gcc`, `clang` or `aspell` output into the required format
- * **The format is extensible**, any acceptance testing *process* can use this format
- * **Validation output is streamable** and available to the reporting tool incrementally
- * **Repeatability** is specified
+ * **It is simple**, a few lines of Ruby can translate `gcc`, `clang` or `aspell` output into the required format.
+ * **The format is extensible**, any acceptance testing *process* can use this format.
+ * **Validation output is streamable** and available to the reporting tool incrementally.
+ * **Repeatability** is specified.
 
 # Project Status
 
-This standard is currently version 0.4.0. We follow [Semantic Versioning](http://semver.org/).
-
-**You can start using this standard today.** A few backwards-incompatible changes may be introduced before the 1.0.0. This will be a candidate for 1.0.0 release when all below items are completed.
+This standard is currently version 1.0.0. We follow [Semantic Versioning](http://semver.org/).
 
  - [x] Defines the input format to select computer files
  - [x] Defines the output format for the *outcome*, *findings* and *recommendations*
@@ -86,10 +84,10 @@ Please add your own projects below!
 
 Supporting acceptance testing programs:
 
- * [web-puc - Web package update checker](https://github.com/fulldecent/web-puc) / version 0.3.1
- * [Line ending linter](https://github.com/mcandre/lili) / version 0.4.0
- * [Column width linter](https://github.com/mcandre/cowl) / version 0.4.0
- * YOUR NAME HERE (STAT VERSION NUMBER SUPPORTED)
+ * [web-puc - Web package update checker](https://github.com/fulldecent/web-puc)
+ * [Line ending linter](https://github.com/mcandre/lili)
+ * [Column width linter](https://github.com/mcandre/cowl)
+ * YOUR NAME HERE
 
 Supporting consumers:
 
