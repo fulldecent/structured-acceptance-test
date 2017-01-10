@@ -1,11 +1,13 @@
-class Finding
+require_relative 'JSONable'
+
+class Finding < JSONable
   @failure
   @rule
   @description
   @detail
   @categories
   @location
-  @time_to_fix
+  @timeToFix
   @recommendation
   @fixes
 
@@ -77,11 +79,11 @@ class Finding
 
   def time_to_fix=(time_to_fix)
     throw :typeError unless time_to_fix.is_a?(Integer)
-    @time_to_fix = time_to_fix
+    @timeToFix = time_to_fix
   end
 
   def time_to_fix
-    @time_to_fix
+    @timeToFix
   end
 
   def recommendation=(recommendation)

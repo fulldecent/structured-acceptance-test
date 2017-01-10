@@ -5,14 +5,16 @@ require_relative 'location'
 require_relative 'stat_process'
 require_relative 'repeatability'
 require_relative 'stat_category'
+require_relative 'JSONable'
 
-class Stat
-  STAT_VERSION = '1.0.0'
+class Stat < JSONable
+  attr_reader :statVersion
   @findings
   @process
 
   def initialize(process)
     throw :typeError unless process.is_a?(StatProcess)
+    @statVersion = '1.0.0'
     @process = process
     @findings = []
   end

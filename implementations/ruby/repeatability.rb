@@ -1,5 +1,5 @@
 require 'enum'
 
 class Repeatability < Enum::Base
-  values :volatile, :repeatable, :associative
+  values 'Volatile', 'Repeatable', 'Associative'
 end

@@ -1,6 +1,8 @@
-class Fix
+require_relative 'JSONable'
+
+class Fix < JSONable
   @location
-  @new_text
+  @newText
 
   def initialize(location)
     @location = location
@@ -17,10 +19,10 @@ class Fix
 
   def new_text=(new_text)
     throw :typeError unless new_text.is_a?(String)
-    @new_text = new_text
+    @newText = new_text
   end
 
   def new_text
-    @new_text
+    @newText
   end
 end

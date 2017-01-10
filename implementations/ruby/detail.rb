@@ -1,4 +1,6 @@
-class Detail
+require_relative 'JSONable'
+
+class Detail < JSONable
   @body
   @trace
 

@@ -1,4 +1,6 @@
-class StatProcess
+require_relative 'JSONable'
+
+class StatProcess < JSONable
   @name
   @version
   @description
