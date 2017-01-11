@@ -1,21 +1,16 @@
+module StatModule
+
 require_relative 'JSONable'
 
-class StatProcess < JSONable
-  @name
-  @version
-  @description
-  @maintainer
-  @email
-  @website
-  @repeatability
+class Process < JSONable
 
   def initialize(name)
-    throw :typeError unless name.is_a?(String)
+    raise TypeException unless name.is_a?(String)
     @name = name
   end
 
   def name=(name)
-    throw :typeError unless name.is_a?(String)
+    raise TypeException unless name.is_a?(String)
     @name = name
   end
 
@@ -24,7 +19,7 @@ class StatProcess < JSONable
   end
 
   def version=(version)
-    throw :typeError unless version.is_a?(String)
+    raise TypeException unless version.is_a?(String)
     @version = version
   end
 
@@ -33,7 +28,7 @@ class StatProcess < JSONable
   end
 
   def description=(description)
-    throw :typeError unless description.is_a?(String)
+    raise TypeException unless description.is_a?(String)
     @description = description
   end
 
@@ -42,7 +37,7 @@ class StatProcess < JSONable
   end
 
   def maintainer=(maintainer)
-    throw :typeError unless maintainer.is_a?(String)
+    raise TypeException unless maintainer.is_a?(String)
     @maintainer = maintainer
   end
 
@@ -51,7 +46,7 @@ class StatProcess < JSONable
   end
 
   def email=(email)
-    throw :typeError unless email.is_a?(String)
+    raise TypeException unless email.is_a?(String)
     @email = email
   end
 
@@ -60,7 +55,7 @@ class StatProcess < JSONable
   end
 
   def website=(website)
-    throw :typeError unless website.is_a?(String)
+    raise TypeException unless website.is_a?(String)
     @website = website
   end
 
@@ -69,11 +64,13 @@ class StatProcess < JSONable
   end
 
   def repeatability=(repeatability)
-    throw :typeError unless Repeatability.all.include?(repeatability)
+    raise TypeException unless Repeatability.all.include?(repeatability)
     @repeatability = repeatability
   end
 
   def repeatability
     @repeatability
   end
+end
+
 end
