@@ -122,7 +122,12 @@
           "type": "string"
         },
         "trace": {
-          "$ref": "#/definitions/location"
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/location"
+          },
+          "uniqueItems": true
         }
       },
       "required": [
