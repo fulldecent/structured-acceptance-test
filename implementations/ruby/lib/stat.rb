@@ -9,6 +9,8 @@ module StatModule
   require_relative 'category'
   require_relative 'JSONable'
   require_relative 'type_exception'
+  require_relative 'duplicate_element_exception'
+  require_relative 'index_out_of_bound_exception'
 
   class Stat < JSONable
     attr_reader :statVersion
@@ -18,6 +20,7 @@ module StatModule
       @statVersion = '1.0.0'
       @process = process
       @findings = []
+      @finding_print_index = 0
     end
 
     def findings=(findings)
@@ -40,6 +43,36 @@ module StatModule
 
     def process
       @process
+    end
+
+    def print_header
+      @finding_print_index = 0
+      hash = {}
+      hash['statVersion'] = @statVersion
+      hash['process'] = @process.to_json
+      hash['findings'] = []
+      result = hash.to_json.to_s
+      result = result[0..result.length - 3]
+      puts(result)
+      puts
+    end
+
+    def print_finding
+      if @finding_print_index < @findings.length
+        result = @findings[@finding_print_index].to_json
+        result += ',' unless @finding_print_index >= @findings.length - 1
+        puts(result)
+        puts
+        @finding_print_index += 1
+      else
+        raise IndexOutOfBoundException
+      end
+    end
+
+    def print_footer
+      @finding_print_index = 0
+      puts ']}'
+      puts
     end
   end
 end
