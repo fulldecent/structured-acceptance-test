@@ -74,5 +74,9 @@ module StatModule
       puts ']}'
       puts
     end
+
+    def to_json(options = {})
+      super(['finding_print_index'])
+    end
   end
 end
