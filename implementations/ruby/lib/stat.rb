@@ -55,6 +55,7 @@ module StatModule
       result = result[0..result.length - 3]
       puts(result)
       puts
+      $stdout.flush
     end
 
     def print_finding
@@ -63,6 +64,7 @@ module StatModule
         result += ',' unless @finding_print_index >= @findings.length - 1
         puts(result)
         puts
+        $stdout.flush
         @finding_print_index += 1
       else
         raise IndexOutOfBoundException
@@ -73,6 +75,7 @@ module StatModule
       @finding_print_index = 0
       puts ']}'
       puts
+      $stdout.flush
     end
 
     def to_json(options = {})
