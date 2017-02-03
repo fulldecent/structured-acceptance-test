@@ -2,12 +2,46 @@ module StatModule
   require 'json'
 
   class JSONable
+    def initialize(hash)
+      if hash.is_a? Hash
+        hash.each do |k, v|
+          if v.is_a? Array
+            items = []
+            v.each { |i|
+              case k
+                when 'findings'
+                  item = StatModule::Finding.new(nil, nil, nil, i)
+                when 'fixes'
+                  item = StatModule::Fix.new(nil, i)
+                when 'traces'
+                  item = StatModule::Location.new(nil, i)
+                else
+                  v = item
+              end
+              items.push(item)
+            }
+            v = items
+          end
+
+          self.instance_variable_set("@#{k}", v) ## create and initialize an instance variable for this key/value pair
+          self.class.send(:define_method, k, proc { self.instance_variable_get("@#{k}") }) ## create the getter that returns the instance variable
+          self.class.send(:define_method, "#{k}=", proc { |v| self.instance_variable_set("@#{k}", v) }) ## create the setter that sets the instance variable
+        end
+      end
+    end
+
     def to_json(excluded_fields = [])
       hash = {}
       self.instance_variables.each do |var|
         hash[var.to_s.delete "@"] = self.instance_variable_get var unless excluded_fields.is_a?(Array) && excluded_fields.include?(var.to_s.delete "@")
       end
       hash.to_json
+    end
+
+    def self.from_json! string
+      JSON.load(string).each do |var, val|
+        self.instance_variable_set '@' + var, val
+      end
     end
   end
 end

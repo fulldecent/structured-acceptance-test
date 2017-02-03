@@ -15,12 +15,18 @@ module StatModule
   class Stat < JSONable
     attr_reader :statVersion
 
-    def initialize(process)
-      raise TypeException unless process.is_a?(StatModule::Process)
-      @statVersion = '1.0.0'
-      @process = process
-      @findings = []
+    def initialize(process, hash = nil)
       @finding_print_index = 0
+      @findings = []
+
+      if hash.is_a? Hash
+        super(hash)
+        return
+      end
+
+      raise TypeException unless process.is_a?(StatModule::Process)
+      @statVersion = '1.0.1'
+      @process = process
     end
 
     def findings=(findings)

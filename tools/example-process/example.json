@@ -1,0 +1,27 @@
+{
+  "statVersion": "1.0.0",
+  "process": {
+    "name": "One two three example process"
+  },
+  "findings": [
+    {
+      "failure": false,
+      "rule": "Go to your room",
+      "description": "I told you once",
+      "categories": [
+        "Clarity",
+        "Compatibility"
+      ]
+    },
+    {
+      "failure": false,
+      "rule": "Go to your room",
+      "description": "I told you twice"
+    },
+    {
+      "failure": true,
+      "rule": "Go to your room",
+      "description": "I told you three times"
+    }
+  ]
+}

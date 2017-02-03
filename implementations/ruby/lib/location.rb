@@ -3,7 +3,11 @@ module StatModule
 
   class Location < JSONable
 
-    def initialize(path)
+    def initialize(path, hash = nil)
+      if hash.is_a? Hash
+        super(hash)
+        return
+      end
       @path = path
     end
 

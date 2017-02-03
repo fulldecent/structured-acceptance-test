@@ -3,7 +3,11 @@ module StatModule
 
   class Fix < JSONable
 
-    def initialize(location)
+    def initialize(location, hash = nil)
+      if hash.is_a? Hash
+        super(hash)
+        return
+      end
       @location = location
     end
 
