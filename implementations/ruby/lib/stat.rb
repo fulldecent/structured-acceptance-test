@@ -25,7 +25,7 @@ module StatModule
       end
 
       raise TypeException unless process.is_a?(StatModule::Process)
-      @statVersion = '1.0.1'
+      @statVersion = '1.0.0'
       @process = process
     end
 
