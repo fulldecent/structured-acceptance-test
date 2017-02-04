@@ -84,5 +84,31 @@ module StatModule
     def to_json(options = {})
       super(['finding_print_index'])
     end
+
+    def summary_print(formatted = false)
+      errors = 0
+      warnings = 0
+      findings.each { |finding|
+        if finding.failure
+          errors += 1
+        else
+          warnings += 1
+        end
+      }
+      if errors == 0 && warnings == 0
+        result = "#{FORMATTING_CHECKMARK} PASSED with no warning".colorize(:green)
+      elsif errors == 0
+        result = "#{FORMATTING_WARNING} PASSED with #{warnings} warning".colorize(:yellow)
+      elsif warnings == 0
+        result = "#{FORMATTING_BALL} FAILED with #{errors} error".colorize(:red)
+      else
+        result = "#{FORMATTING_BALL} FAILED with #{errors} error and #{warnings} warning".colorize(:red)
+      end
+      if formatted
+        result
+      else
+        result[result.index(' ') + 1..result.length]
+      end
+    end
   end
 end

@@ -3,8 +3,9 @@ require 'json'
 require "json-schema"
 require 'optparse'
 require_relative 'version'
-
 require_relative '../../../implementations/ruby/lib/stat'
+
+pretty_output = true
 
 def valid_json?(json)
   begin
@@ -18,6 +19,10 @@ end
 option = OptionParser.new do |option|
   option.banner = 'Usage: example-consumer <file>'
 
+  option.on('-s', '--simple_output', 'Simple output') do
+    pretty_output = false
+  end
+
   option.on('-h', '--help', 'Print usage info') do
     puts option
     exit
@@ -28,6 +33,7 @@ option = OptionParser.new do |option|
     exit
   end
 end
+
 
 option.parse!
 
@@ -41,11 +47,19 @@ filename =
       end
     end
 
+String.disable_colorization = true unless pretty_output
+
 stat = nil
 if !filename.nil?
   content = File.read(filename)
   hash = JSON.parse(content)
   stat = StatModule::Stat.new(nil, hash)
+  puts stat.process.print(pretty_output)
+  puts
+  stat.findings.each{ |finding|
+    puts finding.print(pretty_output)
+    puts
+  }
 else
   block = ''
   ARGF.each_line { |line|
@@ -54,20 +68,17 @@ else
     if stat.nil? && valid_json?(block + ']}')
       block += ']}'
       stat = StatModule::Stat.new(nil, StatModule::Stat::from_json!(block))
+      puts stat.process.print(pretty_output)
+      puts
       block = ''
     else
       # second block - findings
       if !stat.nil? && valid_json?(block.chomp(",\n"))
         finding = StatModule::Finding.new(nil, nil, nil, StatModule::Finding::from_json!(block.chomp(",\n")))
         stat.findings.push(finding)
+        puts finding.print(pretty_output)
+        puts
         block = ''
-
-        if finding.failure
-          message = 'FAILURE'
-        else
-          message = 'WARNING'
-        end
-        puts "#{message}: #{finding.description}"
       end
     end
 
@@ -76,14 +87,5 @@ else
 end
 
 unless stat.nil?
-  warnings = 0
-  failures = 0
-  stat.findings.each { |finding|
-    if finding.failure
-      failures += 1
-    else
-      warnings += 1
-    end
-  }
-  puts "SUMMARY: #{warnings} warnings, #{failures} failure"
+  puts stat.summary_print(pretty_output)
 end
