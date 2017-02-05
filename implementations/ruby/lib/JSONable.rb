@@ -4,9 +4,9 @@ module StatModule
 
   class JSONable
 
-    FORMATTING_STAR = '🌟'
-    FORMATTING_CHECKMARK = "\u2714"
-    FORMATTING_BALL = '🌑'
+    FORMATTING_STAR = '⭐'
+    FORMATTING_CHECKMARK = '✅'
+    FORMATTING_BALL = '🛑'
     FORMATTING_WARNING = '⚠'
 
     def initialize(hash)
