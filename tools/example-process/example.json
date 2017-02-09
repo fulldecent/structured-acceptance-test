@@ -1,0 +1,49 @@
+{
+  "statVersion": "1.0.0",
+  "process": {
+    "name": "One two three example process",
+    "version": "1"
+  },
+  "findings": [
+    {
+      "failure": false,
+      "rule": "Go to your room",
+      "description": "I told you zero times"
+    },
+    {
+      "failure": false,
+      "rule": "Go to your room",
+      "description": "I told you once",
+      "location": {
+        "path": "/some/path.txt",
+        "beginLine": 1,
+        "endLine": 2
+      }
+    },
+    {
+      "failure": false,
+      "rule": "Go to your room",
+      "description": "I told you twice",
+      "location": {
+        "path": "/some/path.txt",
+        "beginLine": 1,
+        "endLine": 2,
+        "beginColumn": 23,
+        "endColumn": 29
+      }
+    },
+    {
+      "failure": true,
+      "rule": "Go to your room",
+      "description": "I told you three times",
+      "recommendation": "Reword to avoid the passive voice.",
+      "location": {
+        "path": "/some/path.txt",
+        "beginLine": 1,
+        "endLine": 1,
+        "beginColumn": 23,
+        "endColumn": 29
+      }
+    }
+  ]
+}
