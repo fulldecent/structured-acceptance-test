@@ -55,5 +55,30 @@ module StatModule
     def end_column
       @endColumn
     end
+
+    def print
+      result = "in #{path}"
+      if !begin_line.nil? && !end_line.nil?
+        if begin_line != end_line
+          if !begin_column.nil? && !end_column.nil?
+            result += ", line #{begin_line}:#{begin_column} to line #{end_line}:#{end_column}"
+          elsif !begin_column.nil? && end_column.nil?
+            result += ", line #{begin_line}:#{begin_column} to line #{end_line}"
+          elsif begin_column.nil? && !end_column.nil?
+            result += ", line #{begin_line} to line #{end_line}:#{end_column}"
+          else
+            result += ", lines #{begin_line}-#{end_line}"
+          end
+        else
+          if begin_column.nil?
+            result += ", line #{begin_line}"
+          else
+            result += ", line #{begin_line}:#{begin_column}"
+            result += "-#{end_column}" unless end_column.nil?
+          end
+        end
+      end
+      result
+    end
   end
 end

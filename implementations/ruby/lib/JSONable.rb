@@ -1,7 +1,14 @@
 module StatModule
   require 'json'
+  require 'colorize'
 
   class JSONable
+
+    FORMATTING_STAR = '⭐'
+    FORMATTING_CHECKMARK = '✅'
+    FORMATTING_BALL = '🛑'
+    FORMATTING_WARNING = '⚠'
+
     def initialize(hash)
       if hash.is_a? Hash
         hash.each do |k, v|
@@ -22,7 +29,16 @@ module StatModule
             }
             v = items
           end
-
+          if v.is_a? Hash
+            case k
+              when 'process'
+                v = StatModule::Process.new(nil, v)
+              when 'location'
+                v = StatModule::Location.new(nil, v)
+              when 'detail'
+                v = StatModule::Detail.new(nil, v)
+            end
+          end
           self.instance_variable_set("@#{k}", v) ## create and initialize an instance variable for this key/value pair
           self.class.send(:define_method, k, proc { self.instance_variable_get("@#{k}") }) ## create the getter that returns the instance variable
           self.class.send(:define_method, "#{k}=", proc { |v| self.instance_variable_set("@#{k}", v) }) ## create the setter that sets the instance variable

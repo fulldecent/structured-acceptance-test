@@ -1,3 +1,4 @@
 source 'http://rubygems.org'
 
 gem 'safe-enum'
+gem 'colorize'

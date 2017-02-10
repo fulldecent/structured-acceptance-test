@@ -3,9 +3,15 @@ module StatModule
 
   class Detail < JSONable
 
-    def initialize(body)
-      @body = body
+    def initialize(body, hash = nil)
       @trace = []
+
+      if hash.is_a? Hash
+        super(hash)
+        return
+      end
+
+      @body = body
     end
 
     def body=(body)
