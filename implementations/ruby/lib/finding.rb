@@ -3,13 +3,19 @@ module StatModule
 
   class Finding < JSONable
 
-    def initialize(failure, rule, description)
+    def initialize(failure, rule, description, hash = nil)
+      @categories = []
+      @fixes = []
+
+      if hash.is_a? Hash
+        super(hash)
+        return
+      end
+
       raise TypeException unless rule.is_a?(String) && description.is_a?(String)
       @failure = failure
       @rule = rule
       @description = description
-      @categories = []
-      @fixes = []
     end
 
     def failure=(failure)
@@ -98,6 +104,20 @@ module StatModule
 
     def fixes
       @fixes
+    end
+
+    def print(formatted = false)
+      result = "#{rule}, #{description}"
+      if formatted
+        if failure
+          result = "#{FORMATTING_BALL} #{result}".colorize(:red)
+        else
+          result = "#{FORMATTING_WARNING} #{result}".colorize(:yellow)
+        end
+      end
+      result += "\n#{location.print}" unless location.nil?
+      result += "\nRECOMMENDATION: #{recommendation}" unless recommendation.nil?
+      result
     end
   end
 end

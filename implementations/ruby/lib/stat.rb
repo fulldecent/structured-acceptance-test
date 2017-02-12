@@ -15,12 +15,18 @@ module StatModule
   class Stat < JSONable
     attr_reader :statVersion
 
-    def initialize(process)
+    def initialize(process, hash = nil)
+      @finding_print_index = 0
+      @findings = []
+
+      if hash.is_a? Hash
+        super(hash)
+        return
+      end
+
       raise TypeException unless process.is_a?(StatModule::Process)
       @statVersion = '1.0.0'
       @process = process
-      @findings = []
-      @finding_print_index = 0
     end
 
     def findings=(findings)
@@ -55,6 +61,7 @@ module StatModule
       result = result[0..result.length - 3]
       puts(result)
       puts
+      $stdout.flush
     end
 
     def print_finding
@@ -63,6 +70,7 @@ module StatModule
         result += ',' unless @finding_print_index >= @findings.length - 1
         puts(result)
         puts
+        $stdout.flush
         @finding_print_index += 1
       else
         raise IndexOutOfBoundException
@@ -73,10 +81,37 @@ module StatModule
       @finding_print_index = 0
       puts ']}'
       puts
+      $stdout.flush
     end
 
     def to_json(options = {})
       super(['finding_print_index'])
+    end
+
+    def summary_print(formatted = false)
+      errors = 0
+      warnings = 0
+      findings.each { |finding|
+        if finding.failure
+          errors += 1
+        else
+          warnings += 1
+        end
+      }
+      if errors == 0 && warnings == 0
+        result = "#{FORMATTING_CHECKMARK} PASSED with no warning".colorize(:green)
+      elsif errors == 0
+        result = "#{FORMATTING_WARNING} PASSED with #{warnings} warning".colorize(:yellow)
+      elsif warnings == 0
+        result = "#{FORMATTING_BALL} FAILED with #{errors} error".colorize(:red)
+      else
+        result = "#{FORMATTING_BALL} FAILED with #{errors} error and #{warnings} warning".colorize(:red)
+      end
+      if formatted
+        result
+      else
+        result[result.index(' ') + 1..result.length]
+      end
     end
   end
 end
