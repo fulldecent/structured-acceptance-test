@@ -3,6 +3,7 @@ require 'json'
 require "json-schema"
 require 'optparse'
 require_relative 'version'
+
 require_relative '../../../implementations/ruby/lib/stat'
 
 pretty_output = true
@@ -34,7 +35,6 @@ option = OptionParser.new do |option|
   end
 end
 
-
 option.parse!
 
 filename =
@@ -54,6 +54,7 @@ if !filename.nil?
   content = File.read(filename)
   hash = JSON.parse(content)
   stat = StatModule::Stat.new(nil, hash)
+
   puts stat.process.print(pretty_output)
   puts
   stat.findings.each{ |finding|
