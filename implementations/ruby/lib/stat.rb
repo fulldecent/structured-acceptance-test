@@ -55,9 +55,9 @@ module StatModule
       @finding_print_index = 0
       hash = {}
       hash['statVersion'] = @statVersion
-      hash['process'] = @process.to_json
+      hash['process'] = @process
       hash['findings'] = []
-      result = hash.to_json.to_s
+      result = hash.to_json
       result = result[0..result.length - 3]
       puts(result)
       puts
@@ -68,7 +68,7 @@ module StatModule
       if @finding_print_index < @findings.length
         result = @findings[@finding_print_index].to_json
         result += ',' unless @finding_print_index >= @findings.length - 1
-        puts(result)
+        puts result
         puts
         $stdout.flush
         @finding_print_index += 1
