@@ -2,7 +2,7 @@
 
 require 'optparse'
 require_relative 'version'
-require_relative '../../implementations/ruby/lib/stat'
+require_relative 'stat'
 require 'xmlsimple'
 
 option = OptionParser.new do |option|

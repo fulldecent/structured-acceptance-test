@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 require 'json'
-require "json-schema"
+require 'json-schema'
 require 'optparse'
+require 'stat'
 require_relative 'version'
-require_relative '../../../implementations/ruby/lib/stat'
 
 pretty_output = true
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'structured-acceptance-test'
+require 'stat'
 
 process = StatModule::Process.new('One two three example process')
 stat = StatModule::Stat.new(process)
