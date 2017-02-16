@@ -6,7 +6,7 @@ module StatModule
 
     FORMATTING_STAR = '⭐'
     FORMATTING_CHECKMARK = '✅'
-    FORMATTING_BALL = '🛑'
+    FORMATTING_BALL = '⚫'
     FORMATTING_WARNING = '⚠'
 
     def initialize(hash)
