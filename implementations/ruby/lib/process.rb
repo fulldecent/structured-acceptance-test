@@ -4,7 +4,7 @@ module StatModule
 
   class Process < JSONable
 
-    def initialize(name, hash)
+    def initialize(name, hash = nil)
       if hash.is_a? Hash
         super(hash)
         return
