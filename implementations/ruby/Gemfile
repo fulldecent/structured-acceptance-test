@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
 
 gem 'safe-enum'
+gem 'json-schema'
 gem 'colorize'
