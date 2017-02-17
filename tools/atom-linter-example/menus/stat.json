@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Run program",
+        "command": "stat:run"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "stat",
+          "submenu": [
+            {
+              "label": "Run program",
+              "command": "stat:run"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

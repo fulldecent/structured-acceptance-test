@@ -1,0 +1,25 @@
+{
+  "name": "stat",
+  "main": "./lib/stat",
+  "version": "0.0.0",
+  "description": "Atom package example for programs compatible with STAT",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "stat:run"
+  },
+  "repository": "https://github.com/fulldecent/structured-acceptance-test",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "consumedServices": {
+     "linter-indie": {
+       "versions": {
+         "1.0.0": "consumeLinter"
+       }
+     }
+   },
+  "dependencies": {
+  }
+}
