@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+gem 'structured-acceptance-test', '0.0.5'
+require 'stat'
+
+process = StatModule::Process.new('One two three example process', nil)
+stat = StatModule::Stat.new(process)
+
+finding_one = StatModule::Finding.new(false, 'Go to your room', 'I told you once')
+location_one = StatModule::Location.new('somefile')
+location_one.begin_line = 5
+location_one.end_line = 5
+location_one.begin_column = 1
+location_one.end_column = 6
+finding_one.location = location_one
+
+finding_two = StatModule::Finding.new(false, 'Go to your room', 'I told you twice')
+location_two = StatModule::Location.new('somefile')
+location_two.begin_line = 8
+location_two.end_line = 8
+location_two.begin_column = 2
+location_two.end_column = 10
+finding_two.location = location_two
+
+finding_three = StatModule::Finding.new(true, 'Go to your room', 'I told you three times')
+location_three = StatModule::Location.new('somefile')
+location_three.begin_line = 4
+location_three.end_line = 5
+location_three.begin_column = 1
+location_three.end_column = 11
+finding_three.location = location_three
+
+stat.print_header
+sleep 1
+
+stat.findings.push(finding_one)
+stat.print_finding
+sleep 3
+
+stat.findings.push(finding_two)
+stat.print_finding
+sleep 3
+
+stat.findings.push(finding_three)
+stat.print_finding
+sleep 3
+
+stat.print_footer
