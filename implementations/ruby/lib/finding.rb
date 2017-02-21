@@ -4,9 +4,6 @@ module StatModule
   class Finding < JSONable
 
     def initialize(failure, rule, description, hash = nil)
-      @categories = []
-      @fixes = []
-
       if hash.is_a? Hash
         super(hash)
         return
