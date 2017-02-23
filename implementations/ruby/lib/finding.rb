@@ -4,9 +4,6 @@ module StatModule
   class Finding < JSONable
 
     def initialize(failure, rule, description, hash = nil)
-      @categories = []
-      @fixes = []
-
       if hash.is_a? Hash
         super(hash)
         return
@@ -95,7 +92,7 @@ module StatModule
 
     def fixes=(fixes)
       raise TypeException unless fixes.is_a?(Array)
-      @fixes.each { |item|
+      fixes.each { |item|
         raise TypeException unless item.is_a?(StatModule::Fix)
         raise DuplicateElementException if @fixes.include?(item)
         @fixes.push(item)
