@@ -62,7 +62,7 @@ This standard is currently version 1.0.0. We follow [Semantic Versioning](http:/
  - [x] Follows the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml)
  - [x] Supports real-time, incremental reporting
  - [x] An example computer program is produced that supports STAT
- - [ ] An example computer program is produced that reads and reports the above output (Issue #6)
+ - [x] An example computer program is produced that reads and reports the above output (Issue #6)
  - [x] Useful computer program is produced (or transformed) to support STAT
  - [x] Compatibility is established with [Code Climate Engine specification](https://github.com/codeclimate/spec)
 
@@ -87,6 +87,9 @@ Supporting acceptance testing programs:
  * [web-puc - Web package update checker](https://github.com/fulldecent/web-puc)
  * [Line ending linter](https://github.com/mcandre/lili)
  * [Column width linter](https://github.com/mcandre/cowl)
+ * [TO-DO items linter](https://github.com/mcandre/gtdlint)
+ * [Encoding linter](https://github.com/mcandre/enlint)
+ * [Spell check linter](https://github.com/mcandre/aspelllint)
  * YOUR NAME HERE
 
 Supporting consumers:
