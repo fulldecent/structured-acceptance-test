@@ -1,0 +1,26 @@
+{
+    "name": "fulldecent/structured-acceptance-test",
+    "description": "An open format definition for static analysis tools",
+    "homepage": "https://github.com/fulldecent/structured-acceptance-test",
+    "license": "MIT",
+    "keywords": ["static", "testing", "lint", "linter"],
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "William Entriken",
+            "email": "github.com@phor.net",
+            "homepage": "http://phor.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "4.*|5.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "ThinPdo": "src/"
+        }
+    }
+}
