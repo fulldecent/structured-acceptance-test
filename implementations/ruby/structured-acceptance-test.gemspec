@@ -1,8 +1,8 @@
 require 'rake'
 Gem::Specification.new do |s|
   s.name        = 'structured-acceptance-test'
-  s.version     = '0.0.5'
-  s.date        = '2017-02-17'
+  s.version     = '0.0.6'
+  s.date        = '2017-04-12'
   s.summary     = 'Structured acceptance test'
   s.description = 'Structured acceptance test data structure gem'
   s.authors     = ['William Entriken', 'Ilia Grabko']
@@ -10,4 +10,8 @@ Gem::Specification.new do |s|
   s.files       = FileList['lib/*.rb']
   s.homepage    = 'https://github.com/fulldecent/structured-acceptance-test'
   s.license     = 'MIT'
+
+  s.add_runtime_dependency 'safe-enum'
+  s.add_runtime_dependency 'json-schema'
+  s.add_runtime_dependency 'colorize'
 end
