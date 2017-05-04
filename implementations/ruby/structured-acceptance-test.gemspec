@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/fulldecent/structured-acceptance-test'
   s.license     = 'MIT'
 
-  s.add_runtime_dependency 'safe-enum'
-  s.add_runtime_dependency 'json-schema'
-  s.add_runtime_dependency 'colorize'
+  s.add_runtime_dependency 'safe-enum', '>= 0.3.0'
+  s.add_runtime_dependency 'json-schema', '>= 2.8.0'
+  s.add_runtime_dependency 'colorize', '>= 0.8.1'
 end
