@@ -9,6 +9,11 @@ module StatModule
     FORMATTING_BALL = '⚫'
     FORMATTING_WARNING = '⚠'
 
+    ##
+    # Initialize object extending JSONable
+    #
+    # Params:
+    # +hash+:: Hash
     def initialize(hash)
       if hash.is_a? Hash
         hash.each do |k, v|
@@ -46,6 +51,11 @@ module StatModule
       end
     end
 
+    ##
+    # Get object in pretty json format
+    #
+    # Params:
+    # +excluded_fields+:: array of String - attributes to exclude
     def to_json(excluded_fields = [])
       hash = {}
       self.instance_variables.each do |var|
@@ -54,7 +64,9 @@ module StatModule
       JSON.pretty_generate(hash)
     end
 
-    def self.from_json! string
+    ##
+    # Generate Hash from json string
+    def self.from_json!(string)
       JSON.load(string).each do |var, val|
         self.instance_variable_set '@' + var, val
       end

@@ -15,6 +15,12 @@ module StatModule
   class Stat < JSONable
     attr_reader :statVersion
 
+    ##
+    # Initialize new Stat object
+    #
+    # Params:
+    # +process+:: StatModule::Process, required
+    # +hash+:: Hash, can be null
     def initialize(process, hash = nil)
       @finding_print_index = 0
       @findings = []
@@ -29,6 +35,11 @@ module StatModule
       @process = process
     end
 
+    ##
+    # Set array of findings
+    #
+    # Params:
+    # +findings+:: Array of StatModule::Finding
     def findings=(findings)
       raise TypeException unless findings.is_a?(Array)
       findings.each { |item|
@@ -38,19 +49,31 @@ module StatModule
       }
     end
 
+    ##
+    # Get array of findings
     def findings
       @findings
     end
 
+    ##
+    # Set process
+    #
+    # Params:
+    # +process+:: instance of StatModule::Process
     def process=(process)
       raise TypeException unless process.is_a?(StatModule::Process)
       @process = process
     end
 
+    ##
+    # Get process
     def process
       @process
     end
 
+    ##
+    # Prints header of STAT object in json format
+    # Header contains statVersion, process and optional array of findings
     def print_header
       @finding_print_index = 0
       hash = {}
@@ -64,6 +87,8 @@ module StatModule
       $stdout.flush
     end
 
+    ##
+    # Prints one finding in json format.
     def print_finding
       if @finding_print_index < @findings.length
         result = @findings[@finding_print_index].to_json
@@ -77,6 +102,8 @@ module StatModule
       end
     end
 
+    ##
+    # Prints footer of STAT object in json format
     def print_footer
       @finding_print_index = 0
       puts ']}'
@@ -84,10 +111,18 @@ module StatModule
       $stdout.flush
     end
 
+    ##
+    # Get STAT object in json format
     def to_json(options = {})
       super(['finding_print_index'])
     end
 
+    ##
+    # Get statistic information about findings
+    #
+    # Params:
+    #
+    # +formatted+:: indicate weather print boring or pretty colorful statistic
     def summary_print(formatted = false)
       errors = 0
       warnings = 0
