@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../../../implementations/ruby/lib/stat'
+require_relative '../lib/structured-acceptance-test'
 
 class TestStat < Minitest::Test
   def setup

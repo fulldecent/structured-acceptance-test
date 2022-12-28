@@ -1,0 +1,27 @@
+PATH
+  remote: .
+  specs:
+    structured-acceptance-test (0.0.7)
+      colorize (~> 0.8, >= 0.8.1)
+      json-schema (~> 3.0)
+      safe-enum (~> 0.3, >= 0.3.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
+    colorize (0.8.1)
+    json-schema (3.0.0)
+      addressable (>= 2.8)
+    public_suffix (5.0.1)
+    safe-enum (0.3.1)
+
+PLATFORMS
+  arm64-darwin-21
+
+DEPENDENCIES
+  structured-acceptance-test!
+
+BUNDLED WITH
+   2.4.1
